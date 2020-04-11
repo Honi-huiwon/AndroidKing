@@ -1,9 +1,10 @@
 package com.example.androidking
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,13 +13,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnMainLogin.setOnClickListener{
-            val intent: Intent = Intent(this, LoginActivity::class.java)
-            intent.putExtra("id",127)
-            startActivity(intent)
-        }
+        val pagerAdapter = MainPagerAdapter(supportFragmentManager)
+        val mainpager = findViewById<ViewPager>(R.id.vp_main_product)
+        mainpager.adapter = pagerAdapter
 
-        Toast.makeText(this, "로그인 화면으로 넘어갑니다.",Toast.LENGTH_SHORT).show()
+        val maintab = findViewById<TabLayout>(R.id.tl_main_category)
+        maintab.setupWithViewPager(mainpager)
     }
-
 }
